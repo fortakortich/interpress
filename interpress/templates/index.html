@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Подбор университета</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input, select { margin-bottom: 10px; width: 100%; padding: 8px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Форма подбора университета</h1>
+    <form method="post">
+        <label>Ваш GPA: <input type="number" step="0.01" name="gpa" required></label>
+        <label>Балл IELTS: <input type="number" step="0.5" name="ielts" required></label>
+        <label>Балл SAT: <input type="number" name="sat" required></label>
+        <label>Сколько предметов AP: <input type="number" name="ap" required></label>
+        <label>Ваш бюджет ($): <input type="number" name="budget" required></label>
+        <label>Специальность:
+            <select name="major">
+                <option>IT</option>
+                <option>Бизнес</option>
+                <option>Инженерия</option>
+                <option>Медицина</option>
+                <option>Физика</option>
+                <option>Математика</option>
+            </select>
+        </label>
+        <label>Предпочтительный климат:
+            <select name="climate">
+                <option>Тёплый</option>
+                <option>Холодный</option>
+                <option>Умеренный</option>
+            </select>
+        </label>
+        <label>Уровень проектов:
+            <select name="project_level">
+                <option>Нет</option>
+                <option>Базовый</option>
+                <option>Средний</option>
+                <option>Продвинутый</option>
+            </select>
+        </label>
+        <button type="submit">Подобрать университеты</button>
+    </form>
+
+    {% if results %}
+    <h2>Подходящие университеты:</h2>
+    <table>
+        <tr>
+            <th>Университет</th>
+            <th>Страна</th>
+            <th>Город</th>
+            <th>Гранты</th>
+            <th>Стоимость проживания</th>
+            <th>Описание</th>
+        </tr>
+        {% for uni in results %}
+        <tr>
+            <td>{{ uni["Название университета"] }}</td>
+            <td>{{ uni["Страна"] }}</td>
+            <td>{{ uni["Город"] }}</td>
+            <td>{{ uni["Гранты"] }}</td>
+            <td>{{ uni["Стоимость проживания"] }}</td>
+            <td>{{ uni["Краткое описание"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
